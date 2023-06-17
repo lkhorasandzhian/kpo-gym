@@ -1,4 +1,4 @@
-package kpo.crud.Services;
+package kpo.crud.services;
 
 import kpo.crud.models.Workout;
 import kpo.crud.requests.WorkoutRequest;
@@ -23,6 +23,17 @@ public class GymService {
 
     public ResponseEntity<String> add(WorkoutRequest request) {
         Workout workout = new Workout();
+
+        if (request.getName() == null || request.getName().equals("")) {
+            return new ResponseEntity<>("Incorrect name", HttpStatus.BAD_REQUEST);
+        } else if (request.getTime() == null || request.getTime() <= 0 || request.getTime() > 180)  {
+            return new ResponseEntity<>("Incorrect time", HttpStatus.BAD_REQUEST);
+        } else if (request.getDescription() == null || request.getDescription().equals("")) {
+            return new ResponseEntity<>("Incorrect description", HttpStatus.BAD_REQUEST);
+        } else if (request.getCoach() == null || request.getCoach().equals("")) {
+            return new ResponseEntity<>("Incorrect coach", HttpStatus.BAD_REQUEST);
+        }
+
         workout.setName(request.getName());
         workout.setTime(request.getTime());
         workout.setDescription(request.getDescription());
@@ -61,7 +72,7 @@ public class GymService {
             workout.setDescription(request.getDescription());
         }
 
-        if (request.getTime() != 0 && !request.getTime().equals(workout.getTime())) {
+        if ((request.getTime() > 0 && request.getTime() <= 180) && !request.getTime().equals(workout.getTime())) {
             response.append("Time has been changed").append("\n");
             workout.setTime(request.getTime());
         }

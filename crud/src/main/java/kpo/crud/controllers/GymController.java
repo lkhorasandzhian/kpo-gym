@@ -1,6 +1,6 @@
 package kpo.crud.controllers;
 
-import kpo.crud.Services.GymService;
+import kpo.crud.services.GymService;
 import kpo.crud.models.Workout;
 import kpo.crud.requests.WorkoutRequest;
 import lombok.RequiredArgsConstructor;
