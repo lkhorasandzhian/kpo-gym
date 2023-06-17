@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkoutRequest {
-    @
     private String name;
     private String description;
     private Integer time;
